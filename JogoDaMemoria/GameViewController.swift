@@ -10,6 +10,12 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    //@TODO:luis.pozenato: Ao clicar nas cartas. flip count só conta quando necessário
+    //@TODO:luis.pozenato: Cartas com cantos arredondados
+    //@TODO:luis.pozenato: Constraint Layout
+    //@TODO:luis.pozenato: Separar Game de Struct Card em arquivos... DONE
+    //@TODO:luis.pozenato: Code rafactory
+    
     lazy var game = Game(numberOfPairOfCards: self.buttonsArray.count / 2)
     var cardTextProvider: CardTextProvider!
     var flipCount: Int = 0 {
@@ -21,6 +27,7 @@ class GameViewController: UIViewController {
 
     @IBOutlet var buttonsArray: [UIButton]!
     @IBOutlet weak var flipCountLabel: UILabel!
+    
     @IBAction func touchCard(_ sender: UIButton) {
         if let cardNumber: Int = buttonsArray.firstIndex(of: sender) {
             self.game.chooseCard(at: cardNumber)
