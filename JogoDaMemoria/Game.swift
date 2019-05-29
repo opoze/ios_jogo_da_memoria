@@ -11,7 +11,6 @@ import Foundation
 class Game {
     
     var cards: [Card] = []
-    
     var indexOfSelectedCard: Int?
     var countMatches: Int = 0
     var pairCount: Int = 0
@@ -28,7 +27,6 @@ class Game {
     }
     
     func chooseCard(at index: Int){
-        
         if cards.indices.contains(index), !cards[index].isMatched {
             if let matachedIndex = self.indexOfSelectedCard, index != matachedIndex {
                 if cards[matachedIndex].identifier == cards[index].identifier {
@@ -38,7 +36,6 @@ class Game {
                     if self.countMatches == self.pairCount {
                         self.win = true
                     }
-                    
                 }
                 cards[index].isFaceUp = true
                 self.indexOfSelectedCard = nil
@@ -51,9 +48,14 @@ class Game {
                 self.indexOfSelectedCard = index
             }
         }
-        
     }
     
+    func restart(){
+        self.indexOfSelectedCard = nil
+        self.countMatches = 0
+        self.pairCount = 0
+        self.win = false
+    }
 }
 
 struct Card {
