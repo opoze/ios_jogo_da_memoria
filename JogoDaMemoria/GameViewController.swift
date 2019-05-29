@@ -11,7 +11,7 @@ import UIKit
 class GameViewController: UIViewController {
     
     //@TODO:luis.pozenato: Ao clicar nas cartas. flip count só conta quando necessário
-    //@TODO:luis.pozenato: Cartas com cantos arredondados
+    //@TODO:luis.pozenato: Cartas com cantos arredondados... DONE
     //@TODO:luis.pozenato: Constraint Layout
     //@TODO:luis.pozenato: Separar Game de Struct Card em arquivos... DONE
     //@TODO:luis.pozenato: Code rafactory
@@ -36,10 +36,16 @@ class GameViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // To set card corner radius
+        for btn in buttonsArray {
+            btn.layer.cornerRadius = 20
+        }
+    }
     func updateViewFromModel() {
         if self.game.win {
-            // ao ganhar, muda a cor de fundo
-            // e em um segundo redireciona para tela win
+            // ao ganhar, muda a cor de fundo e em um segundo redireciona para tela win
             self.view.backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
                 self.performSegue(withIdentifier: "win-segue", sender: nil)
