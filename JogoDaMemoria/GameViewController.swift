@@ -10,7 +10,7 @@ import UIKit
 
 class GameViewController: UIViewController {
     
-    //@TODO:luis.pozenato: Ao clicar nas cartas. flip count só conta quando necessário
+    //@TODO:luis.pozenato: Ao clicar nas cartas. flip count só conta quando necessário... DONE
     //@TODO:luis.pozenato: Cartas com cantos arredondados... DONE
     //@TODO:luis.pozenato: Constraint Layout
     //@TODO:luis.pozenato: Separar Game de Struct Card em arquivos... DONE
@@ -30,9 +30,12 @@ class GameViewController: UIViewController {
     
     @IBAction func touchCard(_ sender: UIButton) {
         if let cardNumber: Int = buttonsArray.firstIndex(of: sender) {
-            self.game.chooseCard(at: cardNumber)
-            self.updateViewFromModel()
-            self.flipCount += 1
+            // somente chooseCard se tiver no estado .back
+            if game.cards[cardNumber].cardState == .back {
+                self.game.chooseCard(at: cardNumber)
+                self.updateViewFromModel()
+                self.flipCount += 1
+            }
         }
     }
     
@@ -57,10 +60,12 @@ class GameViewController: UIViewController {
             if card.isFaceUp {
                 button.backgroundColor = card.isMatched ? .clear : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 button.setTitle(self.cardTextProvider.text(for: card.identifier), for: UIControl.State.normal)
+                button.isEnabled = false
             }
             else {
                 button.backgroundColor = #colorLiteral(red: 0.4352941215, green: 0.4431372583, blue: 0.4745098054, alpha: 1)
                 button.setTitle("", for: UIControl.State.normal)
+                button.isEnabled = true
             }
         }
     }
