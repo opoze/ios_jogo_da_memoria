@@ -24,8 +24,8 @@ extension Array {
 
 extension UICard {
     func fadeOut() {
-//        self.animator?.startAnimation()
-        self.isHidden = true
+        self.animator?.startAnimation()
+//        self.isHidden = true
     }
 
     func toFront(text txt: String) {

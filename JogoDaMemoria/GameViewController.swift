@@ -62,7 +62,9 @@ class GameViewController: UIViewController {
             else {
                 if card.isFaceUp {
                     if card.isMatched {
-                        button.fadeOut()
+                        UIView.animate(withDuration: 1.0) {
+                            button.alpha = 0
+                        }
                     }
                     button.toFront(text: text)
                 }
